@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>今日运势 · 神秘玄幻版</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0d0d0d;
+            font-family: "STKaiti", "KaiTi", serif;
+            color: #ffd700;
+            background-image: radial-gradient(circle, #1f1f1f 0%, #0d0d0d 100%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-shadow: 0 0 8px gold, 0 0 20px #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background: linear-gradient(to right, #ffcc00, #ffd700);
+            border: none;
+            border-radius: 30px;
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 0 10px gold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px gold;
+        }
+
+        .section {
+            margin-top: 30px;
+            text-align: left;
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid gold;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+        }
+
+        .section h3 {
+            border-bottom: 1px solid #ffd700;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        .controls button {
+            margin: 5px;
+            padding: 8px 15px;
+            border: 1px solid gold;
+            background: transparent;
+            color: gold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background: gold;
+            color: #000;
+        }
+
+        .saved-box {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .saved-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .saved-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid gold;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>今日运势</h1>
+    <h2>一念之间，窥探天机</h2>
+    <button class="btn" onclick="generateFortune()">生成运势</button>
+
+    <div id="fortuneArea" class="section hidden">
+        <div id="love"></div>
+        <div id="career"></div>
+        <div id="wealth"></div>
+    </div>
+
+    <div class="controls hidden" id="actionButtons">
+        <button onclick="saveFortune()">收藏</button>
+        <button onclick="shareFortune()">分享</button>
+    </div>
+
+    <div class="saved-box">
+        <h4>已收藏的运势</h4>
+        <div id="savedList"></div>
+    </div>
+</div>
+
+<script>
+    const loveFortunes = [
+        "今天是感情升温的好时机，适合表达心意。",
+        "注意沟通方式，避免情绪化对话。",
+        "可能会遇到旧情人，心中波澜不惊为上。",
+    ];
+    const careerFortunes = [
+        "工作状态佳，适合开展新项目。",
+        "小心职场口舌之争，勿卷入是非。",
+        "合作运增强，可寻求外援或合伙发展。",
+    ];
+    const wealthFortunes = [
+        "正财平稳，偏财运旺，宜小试手气。",
+        "财务上要谨慎，不宜大额投资。",
+        "可能有突发支出，需理性安排。",
+    ];
+    const notes = [
+        "宜静不宜动，凡事以稳为主。",
+        "多留意身边小事，有大运隐藏其中。",
+        "佩戴金色饰品，有助提升运势。",
+    ];
+
+    let currentFortune = "";
+
+    function getRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generateFortune() {
+        const love = getRandom(loveFortunes);
+        const career = getRandom(careerFortunes);
+        const wealth = getRandom(wealthFortunes);
+        const note = getRandom(notes);
+
+        document.getElementById("fortuneArea").classList.remove("hidden");
+        document.getElementById("actionButtons").classList.remove("hidden");
+
+        document.getElementById("love").innerHTML = `<h3>💖 爱情运</h3><p>${love}</p>`;
+        document.getElementById("career").innerHTML = `<h3>💼 事业运</h3><p>${career}</p>`;
+        document.getElementById("wealth").innerHTML = `<h3>💰 财运</h3><p>${wealth}</p><br><strong>🔮 注意事项：</strong> ${note}`;
+
+        currentFortune = `【今日运势】\n爱情：${love}\n事业：${career}\n财运：${wealth}\n注意：${note}`;
+    }
+
+    function saveFortune() {
+        if (!currentFortune) return;
+        const saved = JSON.parse(localStorage.getItem("fortunes") || "[]");
+        saved.unshift({ text: currentFortune, time: new Date().toLocaleString() });
+        localStorage.setItem("fortunes", JSON.stringify(saved));
+        renderSaved();
+    }
+
+    function renderSaved() {
+        const saved = JSON.parse(localStorage.getItem("fortunes") || "[]");
+        const list = document.getElementById("savedList");
+        list.innerHTML = saved.map(item =>
+            `<div class="saved-item">
+           <div style="color:#aaa;font-size:0.9em;">📅 ${item.time}</div>
+           <pre style="white-space:pre-wrap;color:#ffd700;">${item.text}</pre>
+         </div>`
+        ).join("");
+    }
+
+    function shareFortune() {
+        if (!navigator.clipboard) {
+            alert("复制失败：您的浏览器不支持剪贴板。");
+            return;
+        }
+        navigator.clipboard.writeText(currentFortune).then(() => {
+            alert("运势内容已复制，可粘贴分享！");
+        });
+    }
+
+    // 初始渲染收藏
+    renderSaved();
+</script>
+</body>
+</html>
