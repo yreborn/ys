@@ -1,210 +1,480 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <title>今日运势 · 神秘玄幻版</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日运势 | 命运之门</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: #0d0d0d;
-            font-family: "STKaiti", "KaiTi", serif;
-            color: #ffd700;
-            background-image: radial-gradient(circle, #1f1f1f 0%, #0d0d0d 100%);
+            background: #000 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJzdGFycyIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxjaXJjbGUgY3g9IjUiIGN5PSI1IiByPSIxIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIyNSIgY3k9IjE1IiByPSIwLjUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjQ1IiBjeT0iMzUiIHI9IjEuNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iNzUiIGN5PSI2NSIgcj0iMSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iOTUiIGN5PSI4NSIgcj0iMC43IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjMiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjc3RhcnMpIi8+PC9zdmc+');
+            color: #e0e0ff;
+            font-family: 'Times New Roman', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-
+        
         .container {
+            width: 90%;
             max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            text-align: center;
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.7), 
+                        0 0 40px rgba(75, 0, 130, 0.5),
+                        inset 0 0 15px rgba(148, 0, 211, 0.3);
+            padding: 30px;
+            margin: 20px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
         }
-
+        
         h1 {
-            font-size: 2.8rem;
-            text-shadow: 0 0 8px gold, 0 0 20px #ffcc00;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            font-size: 1.2rem;
-            color: #ccc;
+            color: #d8a2ff;
+            text-align: center;
+            font-size: 2.5rem;
             margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.8), 0 0 20px rgba(148, 0, 211, 0.5);
+            letter-spacing: 3px;
         }
-
-        .btn {
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            background: linear-gradient(to right, #ffcc00, #ffd700);
+        
+        .fortune-button {
+            display: block;
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            border-radius: 50%;
+            background: radial-gradient(circle, #4b0082, #2a004d);
             border: none;
-            border-radius: 30px;
-            color: #000;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 10px gold;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.8), 
+                        0 0 30px rgba(148, 0, 211, 0.5),
+                        inset 0 0 10px rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 2px;
         }
-
-        .btn:hover {
-            box-shadow: 0 0 20px gold;
+        
+        .fortune-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 1), 
+                        0 0 40px rgba(148, 0, 211, 0.7),
+                        inset 0 0 15px rgba(255, 255, 255, 0.3);
         }
-
-        .section {
-            margin-top: 30px;
-            text-align: left;
-            background: rgba(255, 215, 0, 0.08);
-            border: 1px solid gold;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+        
+        .fortune-button:active {
+            transform: scale(0.98);
         }
-
-        .section h3 {
-            border-bottom: 1px solid #ffd700;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
+        
+        .fortune-button::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
         }
-
-        .controls {
-            margin-top: 20px;
+        
+        @keyframes shine {
+            0% {
+                transform: rotate(45deg) translateY(-100%);
+            }
+            100% {
+                transform: rotate(45deg) translateY(100%);
+            }
         }
-
-        .controls button {
-            margin: 5px;
-            padding: 8px 15px;
-            border: 1px solid gold;
-            background: transparent;
-            color: gold;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .controls button:hover {
-            background: gold;
-            color: #000;
-        }
-
-        .saved-box {
-            margin-top: 40px;
-            text-align: left;
-        }
-
-        .saved-box h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .saved-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 3px solid gold;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .hidden {
+        
+        .result {
             display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(30, 30, 60, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5), inset 0 0 5px rgba(148, 0, 211, 0.3);
+            position: relative;
+            border: 1px solid rgba(138, 43, 226, 0.2);
         }
-
+        
+        .result h2 {
+            color: #b088ff;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+        }
+        
+        .fortune-text, .advice-text {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+        
+        .fortune-rating {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .star {
+            font-size: 1.5rem;
+            color: #8a2be2;
+            margin: 0 5px;
+            text-shadow: 0 0 5px rgba(138, 43, 226, 0.8);
+        }
+        
+        .lucky-color, .lucky-number {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .color-sample {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-left: 10px;
+            vertical-align: middle;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        
+        .mystic-symbol {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .symbol-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 3rem;
+            transform: rotate(-15deg);
+        }
+        
+        .symbol-2 {
+            bottom: 15%;
+            right: 8%;
+            font-size: 2.5rem;
+            transform: rotate(20deg);
+        }
+        
+        .symbol-3 {
+            top: 40%;
+            right: 15%;
+            font-size: 2rem;
+            transform: rotate(-10deg);
+        }
+        
+        .symbol-4 {
+            bottom: 30%;
+            left: 10%;
+            font-size: 2.8rem;
+            transform: rotate(5deg);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            color: #b088ff;
+        }
+        
+        .loading::after {
+            content: "...";
+            animation: dots 1.5s infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60%, 100% { content: "..."; }
+        }
+        
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .cosmic-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000%) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: rgba(224, 224, 255, 0.6);
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>今日运势</h1>
-    <h2>一念之间，窥探天机</h2>
-    <button class="btn" onclick="generateFortune()">生成运势</button>
-
-    <div id="fortuneArea" class="section hidden">
-        <div id="love"></div>
-        <div id="career"></div>
-        <div id="wealth"></div>
+    <div class="cosmic-bg" id="cosmicBg"></div>
+    
+    <div class="container">
+        <h1>✧ 命运之门 ✧</h1>
+        
+        <button id="fortuneButton" class="fortune-button">揭示今日运势</button>
+        
+        <div class="loading" id="loading">命运之轮正在转动</div>
+        
+        <div class="result" id="result">
+            <div class="mystic-symbol symbol-1">☽</div>
+            <div class="mystic-symbol symbol-2">✧</div>
+            <div class="mystic-symbol symbol-3">♆</div>
+            <div class="mystic-symbol symbol-4">☿</div>
+            
+            <h2>今日运势解析</h2>
+            
+            <div class="fortune-rating">
+                <span>运势指数：</span>
+                <span id="stars"></span>
+            </div>
+            
+            <p class="fortune-text" id="fortuneText"></p>
+            
+            <h2>注意事项</h2>
+            <p class="advice-text" id="adviceText"></p>
+            
+            <p class="lucky-color">幸运色：<span id="luckyColor"></span><span class="color-sample" id="colorSample"></span></p>
+            <p class="lucky-number">幸运数字：<span id="luckyNumber"></span></p>
+        </div>
+        
+        <div class="footer">
+            <p>✧ 命运只是指引，未来掌握在你手中 ✧</p>
+        </div>
     </div>
 
-    <div class="controls hidden" id="actionButtons">
-        <button onclick="saveFortune()">收藏</button>
-        <button onclick="shareFortune()">分享</button>
-    </div>
-
-    <div class="saved-box">
-        <h4>已收藏的运势</h4>
-        <div id="savedList"></div>
-    </div>
-</div>
-
-<script>
-    const loveFortunes = [
-        "今天是感情升温的好时机，适合表达心意。",
-        "注意沟通方式，避免情绪化对话。",
-        "可能会遇到旧情人，心中波澜不惊为上。",
-    ];
-    const careerFortunes = [
-        "工作状态佳，适合开展新项目。",
-        "小心职场口舌之争，勿卷入是非。",
-        "合作运增强，可寻求外援或合伙发展。",
-    ];
-    const wealthFortunes = [
-        "正财平稳，偏财运旺，宜小试手气。",
-        "财务上要谨慎，不宜大额投资。",
-        "可能有突发支出，需理性安排。",
-    ];
-    const notes = [
-        "宜静不宜动，凡事以稳为主。",
-        "多留意身边小事，有大运隐藏其中。",
-        "佩戴金色饰品，有助提升运势。",
-    ];
-
-    let currentFortune = "";
-
-    function getRandom(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-    }
-
-    function generateFortune() {
-        const love = getRandom(loveFortunes);
-        const career = getRandom(careerFortunes);
-        const wealth = getRandom(wealthFortunes);
-        const note = getRandom(notes);
-
-        document.getElementById("fortuneArea").classList.remove("hidden");
-        document.getElementById("actionButtons").classList.remove("hidden");
-
-        document.getElementById("love").innerHTML = `<h3>💖 爱情运</h3><p>${love}</p>`;
-        document.getElementById("career").innerHTML = `<h3>💼 事业运</h3><p>${career}</p>`;
-        document.getElementById("wealth").innerHTML = `<h3>💰 财运</h3><p>${wealth}</p><br><strong>🔮 注意事项：</strong> ${note}`;
-
-        currentFortune = `【今日运势】\n爱情：${love}\n事业：${career}\n财运：${wealth}\n注意：${note}`;
-    }
-
-    function saveFortune() {
-        if (!currentFortune) return;
-        const saved = JSON.parse(localStorage.getItem("fortunes") || "[]");
-        saved.unshift({ text: currentFortune, time: new Date().toLocaleString() });
-        localStorage.setItem("fortunes", JSON.stringify(saved));
-        renderSaved();
-    }
-
-    function renderSaved() {
-        const saved = JSON.parse(localStorage.getItem("fortunes") || "[]");
-        const list = document.getElementById("savedList");
-        list.innerHTML = saved.map(item =>
-            `<div class="saved-item">
-           <div style="color:#aaa;font-size:0.9em;">📅 ${item.time}</div>
-           <pre style="white-space:pre-wrap;color:#ffd700;">${item.text}</pre>
-         </div>`
-        ).join("");
-    }
-
-    function shareFortune() {
-        if (!navigator.clipboard) {
-            alert("复制失败：您的浏览器不支持剪贴板。");
-            return;
+    <script>
+        // 创建宇宙背景
+        function createCosmicBackground() {
+            const bg = document.getElementById('cosmicBg');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('cosmic-particle');
+                
+                // 随机大小
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 随机位置
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.bottom = `${Math.random() * 20}%`;
+                
+                // 随机动画延迟和持续时间
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 10;
+                particle.style.animation = `float ${duration}s ${delay}s infinite linear`;
+                
+                // 随机亮度
+                const brightness = Math.random() * 0.5 + 0.3;
+                particle.style.background = `rgba(255, 255, 255, ${brightness})`;
+                
+                bg.appendChild(particle);
+            }
         }
-        navigator.clipboard.writeText(currentFortune).then(() => {
-            alert("运势内容已复制，可粘贴分享！");
-        });
-    }
 
-    // 初始渲染收藏
-    renderSaved();
-</script>
+        // 运势数据库
+        const fortuneData = {
+            general: [
+                "今天的星象显示，你将遇到意想不到的机遇，保持开放的心态，好运将不期而至。",
+                "宇宙能量今日特别活跃，你的直觉将格外敏锐，适合做重要决定。",
+                "今天的行星排列对你不太有利，建议保持低调，避免冲突和重大决策。",
+                "命运之轮今日转向你的方向，长期努力将开始显现成果，收获的季节到来了。",
+                "水星逆行影响你的沟通，今天说话前多思考，避免误解和冲突。",
+                "今日的能量场特别适合创新和突破，大胆尝试新事物，结果会让你惊喜。",
+                "月亮进入你的命宫，情绪可能波动较大，注意自我调节，避免冲动决策。",
+                "今天的星象组合显示，你将遇到一位对你未来有重要影响的人，保持敏锐。",
+                "宇宙今日向你传递平静的能量，适合反思和冥想，寻找内心的答案。",
+                "今天的能量场充满变数，计划可能需要随机应变，保持灵活的态度。"
+            ],
+            work: [
+                "工作上，你的创意将得到重视，大胆表达想法，会有意外收获。",
+                "职场上可能面临挑战，保持冷静和专业，危机将转化为机遇。",
+                "今日适合处理需要细心的工作，你的专注力特别强，能够发现常人忽略的细节。",
+                "工作中可能出现意外变动，保持适应力，这实际上是向更好方向发展的契机。",
+                "今天特别适合团队合作，你的协调能力将帮助团队克服困难。",
+                "职场上需要特别注意人际关系，一个小小的善举可能带来意想不到的回报。",
+                "今日工作效率极高，适合完成那些一直拖延的任务，成就感将伴随你。",
+                "工作中可能遇到阻碍，这是对你耐心的考验，坚持下去，柳暗花明。",
+                "今天你的领导力特别突出，适合主导项目或提出新倡议。",
+                "职场上需要特别注意细节，一个小错误可能导致不必要的麻烦。"
+            ],
+            love: [
+                "感情方面，今天是表达爱意的好时机，真诚的沟通将增进彼此理解。",
+                "今日的星象对感情有些不利，避免敏感话题，给彼此一些空间。",
+                "单身的你今天可能遇到有趣的人，保持开放的心态，但不要操之过急。",
+                "已有伴侣的你，今天适合共同规划未来，星象有利于长远计划的制定。",
+                "今日的能量特别适合修复关系，如有过往的误会，现在是和解的好时机。",
+                "感情中需要特别注意倾听对方的需求，一个小小的体贴可能意义重大。",
+                "今天你的魅力特别突出，适合社交活动，可能遇到志同道合的人。",
+                "已有伴侣的你，今天可能需要处理一些实际问题，共同面对将增进感情。",
+                "今日不适合做感情方面的重大决定，给自己多一些时间思考。",
+                "感情中的小摩擦可能出现，记住沟通是解决问题的关键。"
+            ],
+            health: [
+                "健康方面，今天特别需要注意休息，不要过度劳累，保持充足的睡眠。",
+                "今日适合开始新的健康习惯，星象支持你的积极改变。",
+                "身体能量较低，适当补充营养，避免剧烈运动。",
+                "今天特别适合户外活动，接触自然将帮助你恢复活力。",
+                "注意饮食健康，今天容易受到消化系统问题的困扰。",
+                "精神压力可能较大，尝试冥想或深呼吸来缓解压力。",
+                "今日适合进行温和的运动，如瑜伽或散步，有助于平衡身心。",
+                "可能感到特别疲惫，不要勉强自己，适当休息是恢复的关键。",
+                "今天你的能量特别充沛，适合挑战自己的极限，但记得适度。",
+                "注意保持水分摄入，今天特别容易脱水。"
+            ],
+            advice: [
+                "今日建议：保持开放的心态，接纳新的可能性，机遇就在不经意间。",
+                "今日建议：放慢脚步，给自己一些思考的空间，答案就在内心深处。",
+                "今日建议：大胆表达自己，你的声音比你想象的更有力量。",
+                "今日建议：关注细节，魔鬼藏在细节中，细心将帮助你避免不必要的麻烦。",
+                "今日建议：寻求平衡，工作与生活，付出与收获，找到适合你的节奏。",
+                "今日建议：信任你的直觉，内心的声音往往比理性的分析更准确。",
+                "今日建议：学会放手，有些事情不是努力就能改变的，接受现实才能前进。",
+                "今日建议：感恩当下，珍惜你所拥有的，积极的能量会带来更多好运。",
+                "今日建议：勇于尝试，失败只是成功路上的一部分，不尝试永远不会知道结果。",
+                "今日建议：照顾好自己，自爱是一切爱的基础，只有爱自己才能更好地爱他人。"
+            ],
+            caution: [
+                "今日需谨慎：避免冲动消费，财务决策需三思而后行。",
+                "今日需谨慎：言语可能引起误解，沟通前先整理思路。",
+                "今日需谨慎：路途中可能遇到延误，提前规划行程，预留缓冲时间。",
+                "今日需谨慎：人际关系中可能有小摩擦，保持冷静，避免冲突升级。",
+                "今日需谨慎：工作中可能面临意外挑战，做好应急准备。",
+                "今日需谨慎：健康状况需要关注，不要忽视身体发出的信号。",
+                "今日需谨慎：决策前多方考虑，避免被表面现象误导。",
+                "今日需谨慎：情绪波动可能较大，注意自我调节，避免影响他人。",
+                "今日需谨慎：可能收到虚假信息，验证后再做判断。",
+                "今日需谨慎：熟人之间可能有利益冲突，保持原则，公平处理。"
+            ]
+        };
+
+        // 幸运色列表
+        const luckyColors = [
+            { name: "神秘紫", hex: "#8A2BE2" },
+            { name: "深邃蓝", hex: "#00008B" },
+            { name: "星空黑", hex: "#191970" },
+            { name: "魔法银", hex: "#C0C0C0" },
+            { name: "月光白", hex: "#F8F8FF" },
+            { name: "金星黄", hex: "#FFD700" },
+            { name: "火星红", hex: "#B22222" },
+            { name: "海王蓝", hex: "#4169E1" },
+            { name: "翡翠绿", hex: "#2E8B57" },
+            { name: "暮光灰", hex: "#708090" }
+        ];
+
+        // 生成运势
+        function generateFortune() {
+            const fortuneButton = document.getElementById('fortuneButton');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+            
+            // 显示加载状态
+            fortuneButton.disabled = true;
+            loading.style.display = 'block';
+            result.style.display = 'none';
+            
+            // 模拟加载时间
+            setTimeout(() => {
+                // 生成运势星级 (1-5)
+                const rating = Math.floor(Math.random() * 5) + 1;
+                const starsElement = document.getElementById('stars');
+                starsElement.innerHTML = '';
+                for (let i = 0; i < rating; i++) {
+                    starsElement.innerHTML += '<span class="star">★</span>';
+                }
+                for (let i = rating; i < 5; i++) {
+                    starsElement.innerHTML += '<span class="star" style="opacity:0.3">★</span>';
+                }
+                
+                // 生成运势文本
+                const generalFortune = getRandomItem(fortuneData.general);
+                const workFortune = getRandomItem(fortuneData.work);
+                const loveFortune = getRandomItem(fortuneData.love);
+                const healthFortune = getRandomItem(fortuneData.health);
+                
+                document.getElementById('fortuneText').innerHTML = 
+                    `<strong>综合运势：</strong>${generalFortune}<br><br>` +
+                    `<strong>事业运：</strong>${workFortune}<br><br>` +
+                    `<strong>感情运：</strong>${loveFortune}<br><br>` +
+                    `<strong>健康运：</strong>${healthFortune}`;
+                
+                // 生成注意事项
+                const advice = getRandomItem(fortuneData.advice);
+                const caution = getRandomItem(fortuneData.caution);
+                document.getElementById('adviceText').innerHTML = 
+                    `<strong>建议：</strong>${advice}<br><br>` +
+                    `<strong>注意：</strong>${caution}`;
+                
+                // 生成幸运色
+                const luckyColor = getRandomItem(luckyColors);
+                document.getElementById('luckyColor').textContent = luckyColor.name;
+                document.getElementById('colorSample').style.backgroundColor = luckyColor.hex;
+                
+                // 生成幸运数字
+                const luckyNumber = Math.floor(Math.random() * 99) + 1;
+                document.getElementById('luckyNumber').textContent = luckyNumber;
+                
+                // 隐藏加载，显示结果
+                loading.style.display = 'none';
+                result.style.display = 'block';
+                fortuneButton.disabled = false;
+            }, 2000);
+        }
+        
+        // 获取随机项
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createCosmicBackground();
+            document.getElementById('fortuneButton').addEventListener('click', generateFortune);
+        });
+    </script>
 </body>
 </html>
